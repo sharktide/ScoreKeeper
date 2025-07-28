@@ -1,0 +1,31 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Score__.MainPage">
+
+    <VerticalStackLayout Spacing="20" Padding="30">
+
+        <Label Text="Score Keeper" FontSize="32" HorizontalOptions="Center" />
+
+        <Picker x:Name="playerPicker" Title="Select Player">
+            <Picker.ItemsSource>
+                <x:Array Type="{x:Type x:String}">
+                    <x:String>Player 1</x:String>
+                    <x:String>Player 2</x:String>
+                    <x:String>Player 3</x:String>
+                </x:Array>
+            </Picker.ItemsSource>
+        </Picker>
+
+        <Entry x:Name="scoreEntry"
+               Placeholder="Enter score"
+               Keyboard="Numeric"
+               Completed="OnScoreEntered" />
+
+        <Button Text="Add Score" Clicked="OnAddScoreClicked" />
+        <Button Text="Undo Last Entry" Clicked="OnUndoClicked" />
+
+
+        <Label x:Name="scoreDisplay" FontSize="20" />
+
+    </VerticalStackLayout>
+</ContentPage>
