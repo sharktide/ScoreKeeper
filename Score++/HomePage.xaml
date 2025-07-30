@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Score__.HomePage">
 
-    <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="25">
 
             <Label Text="Welcome to Score++" FontSize="28" HorizontalOptions="Center" />
@@ -12,7 +11,7 @@
             <Button Text="⏯ Resume Last Game" Clicked="OnResumeGame" />
 
             <Label Text="🗂 Saved Sessions:" FontSize="20" />
-
+            <ScrollView>
             <CollectionView x:Name="sessionList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -23,7 +22,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </ScrollView>
 
         </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

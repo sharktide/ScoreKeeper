@@ -1,7 +1,6 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Score__.MainPage">
-        <ScrollView>
         <VerticalStackLayout Spacing="20" Padding="30">
 
             <Label Text="Score Keeper" FontSize="32" HorizontalOptions="Center" />
@@ -25,8 +24,9 @@
             </Grid>
             <Button Text="Undo Last Entry" Clicked="OnUndoClicked" />
 
-
-            <Label x:Name="scoreDisplay" FontSize="20" />
+            <ScrollView>
+                <Label x:Name="scoreDisplay" FontSize="20" />
+            </ScrollView>
 
             <Button Text="Exit Session"
                 Clicked="OnExitToHome"/>
@@ -39,5 +39,4 @@
 
 
         </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

@@ -6,7 +6,7 @@
             <Label Text="New Session" FontSize="28" HorizontalOptions="Center" />
             <Entry x:Name="playerCountEntry" Placeholder="How many players?" Keyboard="Numeric" />
             <Button Text="Create Fields" Clicked="OnCreateFields" />
-            <VerticalStackLayout x:Name="playerNameFields" />
+            <ScrollView><VerticalStackLayout x:Name="playerNameFields" /></ScrollView>
             <Button Text="Start Game" Clicked="OnStartGame" />
         </VerticalStackLayout>
     </ScrollView>
