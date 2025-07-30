@@ -18,10 +18,11 @@
 
         <Entry x:Name="scoreEntry"
                Placeholder="Enter score"
-               Keyboard="Numeric"
-               Completed="OnScoreEntered" />
-
-        <Button Text="Add Score" Clicked="OnAddScoreClicked" />
+               Keyboard="Numeric"></Entry>
+        <HorizontalStackLayout>
+            <Button Text="+ Add" Clicked="OnAddScoreClicked" BackgroundColor="#FF16E116"/>
+            <Button Text="- Subtract" Clicked="OnSubtractScoreClicked" BackgroundColor="Orange"></Button>
+        </HorizontalStackLayout>
         <Button Text="Undo Last Entry" Clicked="OnUndoClicked" />
 
 

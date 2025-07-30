@@ -20,9 +20,9 @@ public partial class MainPage : ContentPage
         AddScore();
     }
 
-    void OnScoreEntered(object sender, EventArgs e)
+    void OnSubtractScoreClicked(object sender, EventArgs e)
     {
-        AddScore();
+        SubtractScore();
     }
 
 	string lastPlayer = null;
@@ -46,6 +46,23 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+    void SubtractScore()
+    {
+        string selectedPlayer = playerPicker.SelectedItem as string;
+		if (selectedPlayer == null || string.IsNullOrWhiteSpace(scoreEntry.Text)) return;
+
+        if (int.TryParse(scoreEntry.Text, out int points))
+        {
+            playerScores[selectedPlayer] -= points;
+
+            lastPlayer = selectedPlayer;
+            lastPoints = points;
+
+            scoreEntry.Text = string.Empty;
+            UpdateScoreDisplay();
+        }
+    }
+
 	void OnUndoClicked(object sender, EventArgs e)
 	{
 		if (lastPlayer != null && lastPoints != 0)
@@ -53,7 +70,6 @@ public partial class MainPage : ContentPage
 			playerScores[lastPlayer] -= lastPoints;
 			UpdateScoreDisplay();
 
-			// Clear undo state
 			lastPlayer = null;
 			lastPoints = 0;
 		}
