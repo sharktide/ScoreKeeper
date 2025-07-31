@@ -1,4 +1,5 @@
 namespace Score__;
+#pragma warning disable CS0618
 
 public partial class NewGamePage : ContentPage
 {
@@ -7,7 +8,7 @@ public partial class NewGamePage : ContentPage
         InitializeComponent();
     }
 
-    void OnCreateFields(object sender, EventArgs e)
+    private void OnCreateFields(object sender, EventArgs e)
     {
         playerNameFields.Children.Clear();
         if (int.TryParse(playerCountEntry.Text, out int count) && count > 0)
@@ -23,7 +24,7 @@ public partial class NewGamePage : ContentPage
         }
     }
 
-    void OnStartGame(object sender, EventArgs e)
+    private void OnStartGame(object sender, EventArgs e)
     {
         var playerNames = playerNameFields.Children
             .OfType<Entry>()
@@ -38,9 +39,13 @@ public partial class NewGamePage : ContentPage
             return;
         }
 
+        string sessionName = string.IsNullOrWhiteSpace(nameEntry.Text)
+            ? $"{DateTime.Now:MMM dd, yyyy - HH:mm}"
+            : nameEntry.Text;
+
         var session = new GameSession
         {
-            SessionName = $"{DateTime.Now:MMM dd, yyyy - HH:mm}",
+            SessionName = sessionName,
             PlayerScores = playerNames.ToDictionary(name => name, _ => 0)
         };
 
@@ -48,8 +53,11 @@ public partial class NewGamePage : ContentPage
         sessions.Add(session);
         SessionStorage.SaveSessions(sessions);
 
-        #pragma warning disable CS0618
         Application.Current!.MainPage = new MainPage(session);
-        #pragma warning restore CS0618
+    }
+    
+    private void OnCancel(object sender, EventArgs e)
+    {
+        Application.Current!.MainPage = new HomePage();
     }
 }

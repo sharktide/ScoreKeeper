@@ -6,12 +6,18 @@
 
             <Label Text="Welcome to Score++" FontSize="28" HorizontalOptions="Center" />
 
-            <Button Text="➕ Start New Game" Clicked="OnStartNewGame" />
+            <Button Text="New Session" Clicked="OnStartNewGame" />
 
-            <Button Text="⏯ Resume Last Game" Clicked="OnResumeGame" />
+            <Button Text="Resume Last Session" Clicked="OnResumeGame" />
 
             <Label Text="🗂 Saved Sessions:" FontSize="20" />
-            <ScrollView>
+
+            <Label x:Name="emptySessionsLabel"
+                Text="No sessions found. Create a new one to get started!"
+                FontSize="16"
+                TextColor="Gray"
+                IsVisible="False" />
+
             <CollectionView x:Name="sessionList">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -22,7 +28,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            </ScrollView>
 
         </VerticalStackLayout>
 </ContentPage>

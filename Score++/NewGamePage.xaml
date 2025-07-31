@@ -1,13 +1,13 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Score__.NewGamePage">  
-    <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">
             <Label Text="New Session" FontSize="28" HorizontalOptions="Center" />
             <Entry x:Name="playerCountEntry" Placeholder="How many players?" Keyboard="Numeric" />
+            <Entry x:Name="nameEntry" Placeholder="Session Name (Optional)" MaxLength="20" />
             <Button Text="Create Fields" Clicked="OnCreateFields" />
             <ScrollView><VerticalStackLayout x:Name="playerNameFields" /></ScrollView>
-            <Button Text="Start Game" Clicked="OnStartGame" />
+            <Button Text="Create Session" Clicked="OnStartGame" />
+            <Button Text="Cancel" Clicked="OnCancel"></Button>
         </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

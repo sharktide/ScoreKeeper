@@ -27,3 +27,4 @@ public static class SessionStorage
         Preferences.Set(StorageKey, json);
     }
 }
+

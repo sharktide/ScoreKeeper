@@ -9,14 +9,15 @@ public partial class HomePage : ContentPage
         InitializeComponent();
         sessions = SessionStorage.LoadSessions();
         sessionList.ItemsSource = sessions;
+        emptySessionsLabel.IsVisible = sessions.Count == 0;
     }
 
-    void OnStartNewGame(object sender, EventArgs e)
+    private void OnStartNewGame(object sender, EventArgs e)
     {
         Application.Current!.MainPage = new NewGamePage();
     }
 
-    void OnResumeGame(object sender, EventArgs e)
+    private void OnResumeGame(object sender, EventArgs e)
     {
         var lastSession = sessions.LastOrDefault();
         if (lastSession != null)
@@ -26,11 +27,11 @@ public partial class HomePage : ContentPage
         }
         else
         {
-            DisplayAlert("Oops", "No saved session found!", "OK");
+            DisplayAlert("Error", "No saved session found!", "OK");
         }
     }
 
-    void OnLoadClicked(object sender, EventArgs e)
+    private void OnLoadClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is string sessionId)
         {
@@ -42,7 +43,7 @@ public partial class HomePage : ContentPage
             }
         }
     }
-    async void OnDeleteSessionClicked(object sender, EventArgs e)
+    private async void OnDeleteSessionClicked(object sender, EventArgs e)
     {
         if (sender is Button btn && btn.CommandParameter is string sessionId)
         {

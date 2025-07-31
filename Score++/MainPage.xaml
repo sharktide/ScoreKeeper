@@ -18,11 +18,14 @@
             <Entry x:Name="scoreEntry"
                 Placeholder="Enter score"
                 Keyboard="Numeric"></Entry>
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Padding="10">
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
                 <Button Grid.Column="0" Text="+ Add" Clicked="OnAddScoreClicked" BackgroundColor="#FF16E116"/>
                 <Button Grid.Column="1" Text="- Subtract" Clicked="OnSubtractScoreClicked" BackgroundColor="Orange"></Button>
             </Grid>
-            <Button Text="Undo Last Entry" Clicked="OnUndoClicked" />
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                <Button Grid.Column="0" Text="Undo" Clicked="OnUndoClicked" />
+                <Button Grid.Column="1" Text="Redo" Clicked="OnRedoClicked" />
+            </Grid>
 
             <ScrollView>
                 <Label x:Name="scoreDisplay" FontSize="20" />

@@ -1,10 +1,11 @@
 ﻿namespace Score__;
 #pragma warning disable CS0618
-#pragma warning disable XC0022
 public partial class MainPage : ContentPage
 {
-    readonly GameSession session;
-    readonly Stack<(string player, int delta)> undoStack = new();
+    private readonly GameSession session;
+    private readonly Stack<(string player, int delta)> undoStack = new();
+    private readonly Stack<(string player, int delta)> redoStack = new();
+
 
 
     public MainPage(GameSession loadedSession)
@@ -16,20 +17,20 @@ public partial class MainPage : ContentPage
     }
 
 
-    void OnAddScoreClicked(object sender, EventArgs e)
+    private void OnAddScoreClicked(object sender, EventArgs e)
     {
         AddScore();
     }
 
-    void OnSubtractScoreClicked(object sender, EventArgs e)
+    private void OnSubtractScoreClicked(object sender, EventArgs e)
     {
         SubtractScore();
     }
 
-    string lastPlayer = null!;
-    int lastPoints = 0;
+    private string lastPlayer = null!;
+    private int lastPoints = 0;
 
-    void AddScore()
+    private void AddScore()
     {
         string selectedPlayer = playerPicker.SelectedItem as string ?? null!;
         if (selectedPlayer == null || string.IsNullOrWhiteSpace(scoreEntry.Text)) return;
@@ -48,7 +49,7 @@ public partial class MainPage : ContentPage
         }
     }
 
-    void SubtractScore()
+    private void SubtractScore()
     {
         string selectedPlayer = playerPicker.SelectedItem as string ?? null!;
         if (selectedPlayer == null || string.IsNullOrWhiteSpace(scoreEntry.Text)) return;
@@ -67,23 +68,35 @@ public partial class MainPage : ContentPage
         }
     }
 
-    void OnUndoClicked(object sender, EventArgs e)
+    private void OnUndoClicked(object sender, EventArgs e)
     {
-        if (undoStack.Any())
+        if (undoStack.Count != 0)
         {
             var (player, delta) = undoStack.Pop();
             session.PlayerScores[player] -= delta;
+            redoStack.Push((player, delta));
             UpdateScoreDisplay();
         }
     }
 
-    void OnExitToHome(object sender, EventArgs e)
+    private void OnRedoClicked(object sender, EventArgs e)
+    {
+        if (redoStack.Count != 0)
+        {
+            var (player, delta) = redoStack.Pop();
+            session.PlayerScores[player] += delta;
+            undoStack.Push((player, delta));
+            UpdateScoreDisplay();
+        }
+    }
+
+    private void OnExitToHome(object sender, EventArgs e)
     {
         Application.Current!.MainPage = new HomePage();
     }
 
 
-    void UpdateScoreDisplay()
+    private void UpdateScoreDisplay()
     {
         scoreDisplay.Text = string.Join("\n", session.PlayerScores.Select(p => $"{p.Key}: {p.Value}"));
         var sessions = SessionStorage.LoadSessions();
@@ -98,7 +111,7 @@ public partial class MainPage : ContentPage
         SessionStorage.SaveSessions(sessions);
     }
     
-    async void OnDeleteCurrentSession(object sender, EventArgs e)
+    private async void OnDeleteCurrentSession(object sender, EventArgs e)
     {
         bool confirm = await DisplayAlert(
             "Confirm Delete",
