@@ -45,6 +45,15 @@
 		<WarningsNotAsErrors>XC0022</WarningsNotAsErrors>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net9.0-maccatalyst'">
+		<PublishTrimmed>true</PublishTrimmed>
+		<PublishAot>true</PublishAot>
+		<UseInterpreter>false</UseInterpreter>
+		<UseHardenedRuntime>true</UseHardenedRuntime>
+		<TrimmerRootAssembly>STRIKE</TrimmerRootAssembly>
+		<TrimmerDefaultAction>link</TrimmerDefaultAction>
+		<IsTrimmable>true</IsTrimmable>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
