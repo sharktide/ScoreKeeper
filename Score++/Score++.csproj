@@ -24,7 +24,7 @@
 		<ApplicationTitle>Score++</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.score</ApplicationId>
+		<ApplicationId>com.sharktide.scoreplusplus</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
