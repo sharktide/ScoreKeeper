@@ -19,7 +19,7 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
+        <AssemblyName>Score</AssemblyName>
 		<!-- Display name -->
 		<ApplicationTitle>Score++</ApplicationTitle>
 
