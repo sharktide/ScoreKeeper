@@ -73,7 +73,7 @@ jobs:
       - name: Manually sign .pkg
         run: |
           PKG_PATH=$(find Score++/bin/Release/net9.0-maccatalyst/publish -name "*.pkg" | head -n 1)
-          SIGNED_PKG="Score++.pkg"
+          SIGNED_PKG="Score.pkg"
           productsign --sign "Developer ID Installer: Navita Meher (5WY7FLX467)" "$PKG_PATH" "$SIGNED_PKG"
       
       - name: Notarize .pkg
@@ -82,8 +82,8 @@ jobs:
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.TEAM_ID }}
         run: |
-          echo "Notarizing Score++.pkg ..."
-          xcrun notarytool submit Score++.pkg \
+          echo "Notarizing Score.pkg ..."
+          xcrun notarytool submit Score.pkg \
             --apple-id "$APPLE_ID" \
             --password "$APPLE_APP_SPECIFIC_PASSWORD" \
             --team-id "$APPLE_TEAM_ID" \
@@ -95,7 +95,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Score++-PKG
-          path: Score++.pkg
+          path: Score.pkg
 
   build-ios:
     if: ${{ github.event.inputs.target == 'net9.0-ios' }}
@@ -261,4 +261,4 @@ jobs:
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
         run: |
-          /usr/local/itms/bin/iTMSTransporter -m upload -assetFile Score++/bin/Release/net9.0-ios/ios-arm64/publish/Score++.ipa -u $APPLE_ID -p $APPLE_APP_SPECIFIC_PASSWORD -itc_provider 5WY7FLX467
+          /usr/local/itms/bin/iTMSTransporter -m upload -assetFile Score++/bin/Release/net9.0-ios/ios-arm64/publish/Score.ipa -u $APPLE_ID -p $APPLE_APP_SPECIFIC_PASSWORD -itc_provider 5WY7FLX467
